@@ -20,6 +20,7 @@ import { UpdateQuestionComponent } from './pages/admin/update-question/update-qu
 import { LoadQuizComponent } from './pages/user/load-quiz/load-quiz.component';
 import { InstructionsComponent } from './pages/user/instructions/instructions.component';
 import { StartComponent } from './pages/user/start/start.component';
+import { ViewAttemptsComponent } from './pages/admin/view-attempts/view-attempts.component';
 
 const routes: Routes = [
   {
@@ -75,6 +76,9 @@ const routes: Routes = [
       },{
         path:'question/:quid/:title/:quesid',
         component:UpdateQuestionComponent
+      },{
+        path:'view-attempts/:quid',
+        component:ViewAttemptsComponent
       }
     ],
   },{

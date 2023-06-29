@@ -17,7 +17,7 @@
                         <p class="truncate">{{q.description}}</p>
                     </mat-card-content>
                     <mat-card-actions>
-                        <button (click)="quizCode(q.quid)" class="ml20 mb10 mt10" mat-stroked-button color="primary" >Start</button>
+                        <button (click)="checkAttempts(q.quid,0)" class="ml20 mb10 mt10" mat-stroked-button color="primary" >Start</button>
                         <div class="text ml20 mb10 mt10" mat-button color="primary">Questions: {{q.numberOfQuestions}}</div>
                         <div class="text ml20 mb10 mt10" mat-button color="primary">Max Marks: {{q.maxMarks}}</div>
                     </mat-card-actions>

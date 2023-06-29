@@ -8,7 +8,10 @@ import Swal from 'sweetalert2';
   styleUrls: ['./view-quizzes.component.css']
 })
 export class ViewQuizzesComponent implements OnInit{
-  quizzes=[];
+  quizzes=[
+    
+  ];
+  random_number: any;
   //   {
   //   quid:23,
   //   title:'Basic Java Quiz',
@@ -36,7 +39,9 @@ export class ViewQuizzesComponent implements OnInit{
   ngOnInit(): void {
     this._quiz.quizzes().subscribe((data:any)=>{
       this.quizzes=data;
+      this.random_number=Math.floor(Math.random()*(999-100+1)+100);
       console.log(this.quizzes);
+      console.log(this.random_number);
     },(error)=>{
       console.log(error);
       Swal.fire('Error','Error loading data','error');

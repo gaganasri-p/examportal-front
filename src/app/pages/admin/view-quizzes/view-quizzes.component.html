@@ -16,7 +16,9 @@
         <button [routerLink]="'/admin/quiz/'+q['quid']" mat-stroked-button color="primary" class="ml20 mb10 mt10">Update</button>
         <div class="ml20 mb10 mt10 text">Max marks: {{q['maxMarks']}} </div>
         <div class="ml20 mb10 mt10 text">No. of Questions: {{q['numberOfQuestions']}} </div>
-         <!-- <button mat-stroked-button color="primary" class="ml20 mb10 mt10">Attempts</button> -->
+
+         <button [routerLink]="'/admin/view-attempts/'+q['quid']" color="primary" mat-stroked-button class="ml20 mb10 mt10">Attempts</button>
+
         <button mat-fab color="primary" class="mb70 mr20" (click)="deleteQuiz(q['quid'])" style="position:absolute;right:0;">
         <mat-icon>delete</mat-icon>
         </button>

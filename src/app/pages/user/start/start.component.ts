@@ -17,6 +17,7 @@ import Swal from 'sweetalert2';
 })
 export class StartComponent implements OnInit{
   currentUser:any;
+  userid:any;
   currentQuiz:any;
   qid:any;
   questions:any;
@@ -27,12 +28,15 @@ export class StartComponent implements OnInit{
   timer:any;
 
   resultData={
-    quiz:{quid:''},
-    user:{id:''},
+   
     attempted:'',
     correctAnswers:'',
-    marksGot:''
+    marksGot:'',
+    quiz:{quid:''},
+    user:{id:''},
+    qAttempt:0,
   };
+  
 
   constructor(
     private locationSt:LocationStrategy,
@@ -46,6 +50,16 @@ export class StartComponent implements OnInit{
     this.qid=this._route.snapshot.params['quid'];
    this.preventBackButton();
    this.loadQuestions();
+   
+   this._login.getCurrentUser().subscribe((data:any)=>{
+    this.resultData.user.id=data.id;
+  });
+
+  this._quiz.getQuiz(this.qid).subscribe((data:any)=>{
+    this.resultData.quiz.quid=data.quid;
+  });
+  
+
   }
   loadQuestions() {
     this._question.getQuestionOfQuizForTest(this.qid).subscribe((data:any)=>{
@@ -109,20 +123,26 @@ export class StartComponent implements OnInit{
       this.attempted=data.attempted;
       
 
-      this._quiz.getQuiz(this.qid).subscribe((data:any)=>{
-        this.resultData.quiz=data;
-      });
-      
-      this._login.getCurrentUser().subscribe((data:any)=>{
-        this.resultData.user=data;
-      });
      
+      // this._login.getCurrentUser().subscribe((data:any)=>{
+      //   this.resultData.user=data;
+      // });
+      //this.resultData.quiz=this.qid;
+
+
+
       this.resultData.attempted=data.attempted;
      this.resultData.correctAnswers=data.correctAnswers;
       this.resultData.marksGot=data.marksGot;
+
+      
+        
+        this.resultData.qAttempt++;
+  
       console.log(this.resultData);
-      this._start.addResult(this.resultData).subscribe((data:any)=>{
-        console.log("hello bitch");
+      console.log("Component "+JSON.stringify(this.resultData));
+      this._login.addResult(this.resultData).subscribe((data:any)=>{
+        
       });
      
       this.isSubmit=true;

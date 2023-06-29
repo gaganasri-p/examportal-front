@@ -22,6 +22,8 @@ export class InstructionsComponent implements OnInit{
     this.qid=this._route.snapshot.params['quid'];
     this._quiz.getQuiz(this.qid).subscribe((data:any)=>{
     this.quiz=data;
+    console.log(this.quiz)
+    console.log("Compo"+JSON.stringify(this.quiz));
     },(error)=>{
       alert("Error in loading data");
     });

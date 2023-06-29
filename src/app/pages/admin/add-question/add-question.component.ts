@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { QuestionService } from 'src/app/services/question.service';
-import { QuizService } from 'src/app/services/quiz.service';
+import { QuestionService } from '../../../services/question.service';
+import { QuizService } from '../../../services/quiz.service';
 import Swal from 'sweetalert2';
 import  ClassicEditor  from '@ckeditor/ckeditor5-build-classic';
 

@@ -43,6 +43,8 @@ import { StartComponent } from './pages/user/start/start.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
+import { ViewAttemptsComponent } from './pages/admin/view-attempts/view-attempts.component';
+import {MonacoEditorModule} from 'ngx-monaco-editor';
 
 
 
@@ -71,6 +73,8 @@ import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
     LoadQuizComponent,
     InstructionsComponent,
     StartComponent,
+    ViewAttemptsComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -92,12 +96,14 @@ import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
     MatRadioModule,
     MatProgressSpinnerModule,
     NgxUiLoaderModule,
+    MonacoEditorModule.forRoot(),
     NgxUiLoaderHttpModule.forRoot({
       showForeground:true,
     }),
-    
+    MonacoEditorModule.forRoot()
   ],
   providers: [authInterceptorProviders],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  
 })
 export class AppModule { }

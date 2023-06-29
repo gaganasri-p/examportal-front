@@ -23,7 +23,12 @@ export class LoginService {
     return this.http.post('http://localhost:8080/generate-token',loginData);
   }
 
- 
+  public addResult(resultData:any){
+    console.log("Service: "+JSON.stringify(resultData));
+    return this.http.post('http://localhost:8080/result/exam',resultData);
+  }
+
+
 
   public loginUser(token: any){
     localStorage.setItem('token',token);
