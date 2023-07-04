@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { QuestionService } from '../../../services/question.service';
-import { QuizService } from '../../../services/quiz.service';
+import { QuestionService } from 'src/app/services/question.service';
+import { QuizService } from 'src/app/services/quiz.service';
 import Swal from 'sweetalert2';
 import  ClassicEditor  from '@ckeditor/ckeditor5-build-classic';
 
@@ -24,6 +24,7 @@ export class AddQuestionComponent implements OnInit{
     option3:'',
     option4:'',
     answer:'',
+    code:false
   };
   constructor(
     private _route:ActivatedRoute,
@@ -65,6 +66,8 @@ export class AddQuestionComponent implements OnInit{
       this.questionData.option3='';
       this.questionData.option4='';
       this.questionData.answer='';
+      this.questionData.code=false;
+      console.log(this.questionData);
     },(error: any)=>{
       Swal.fire("Error",'Error in adding question','error');
       console.log(error);

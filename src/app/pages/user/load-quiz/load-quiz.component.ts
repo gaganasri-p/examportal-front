@@ -57,7 +57,7 @@ export class LoadQuizComponent implements OnInit{
     Swal.fire({
       title: "Please enter the code to start",
       text: "Type the code shared by your instructor:",
-      input: 'number'
+      input:'text'
           
   }).then((result) => {
       if (result.value==qid) {
@@ -86,7 +86,7 @@ export class LoadQuizComponent implements OnInit{
     console.log(this.u_data.id);
     
     this._start.getAttemptsByUser(qid,this.u_data.id).subscribe((data:any)=>{
-      //console.log(data[0].qAttempt);
+      // console.log(data[0].qAttempt);
       try{
         if(data[0].qAttempt<1 || data[0].qAttempt==null || data[0].qAttempt==0 || data==undefined){
         this.quizCode(qid);
@@ -100,7 +100,7 @@ export class LoadQuizComponent implements OnInit{
         });
       }
       }catch(e:any){
-        console.log((e as Error).message);
+        // console.log((e as Error).message);
         this.quizCode(qid);
       }
     });

@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="quizCard">
     <h1 class="ml20 mt10">Add new Quiz</h1>
         <mat-card-content>
             <div class="bootstrap-wrapper">
@@ -47,21 +47,31 @@
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-
+ 
               <mat-slide-toggle
               name="active"
               [(ngModel)]="quizData.active"
               class="mt10"
-              [color]="'primary'"
+              [color]="'rgb(77, 75, 75)'"
               [checked]="false"
               >
             Publish Status
           </mat-slide-toggle>
-          
+
+          <mat-slide-toggle style="margin-left: 75px;"
+              name="showResult"
+              [(ngModel)]="quizData.showResult"
+              class="mt10"
+              [color]="'rgb(77, 75, 75)'"
+              [checked]="false"
+              >
+            Show Results
+          </mat-slide-toggle>
+           
              <br>
 
-                <div class="container text-center mt15">
-                    <button mat-raised-button color="primary" type="submit">Add</button>
+                <div class="container text-center mt15" style="margin-top: 10px;">
+                    <button mat-raised-button style="background-color: rgb(77, 75, 75); color: aliceblue;" type="submit">Add</button>
                 </div>
             </form>
         </div>

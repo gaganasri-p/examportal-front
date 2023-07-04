@@ -21,6 +21,8 @@ import { LoadQuizComponent } from './pages/user/load-quiz/load-quiz.component';
 import { InstructionsComponent } from './pages/user/instructions/instructions.component';
 import { StartComponent } from './pages/user/start/start.component';
 import { ViewAttemptsComponent } from './pages/admin/view-attempts/view-attempts.component';
+import { AddCodingQuestionComponent } from './pages/admin/add-coding-question/add-coding-question.component';
+import { StartCodingComponent } from './pages/user/start-coding/start-coding.component';
 
 const routes: Routes = [
   {
@@ -74,6 +76,9 @@ const routes: Routes = [
         path:'add-question/:quid/:title',
         component:AddQuestionComponent
       },{
+        path:'add-coding-question/:quid/:title',
+        component:AddCodingQuestionComponent
+      },{
         path:'question/:quid/:title/:quesid',
         component:UpdateQuestionComponent
       },{
@@ -98,7 +103,11 @@ const routes: Routes = [
       path:"start/:quid",
       component:StartComponent,
       canActivate:[NormalGuard],
-  }
+  },{
+    path:"start-coding/:quid",
+    component:StartCodingComponent,
+    canActivate:[NormalGuard],
+}
 ];
 
 @NgModule({

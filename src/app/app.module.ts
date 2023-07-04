@@ -44,8 +44,11 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
 import { ViewAttemptsComponent } from './pages/admin/view-attempts/view-attempts.component';
-import {MonacoEditorModule} from 'ngx-monaco-editor';
-
+import { AddCodingQuestionComponent } from './pages/admin/add-coding-question/add-coding-question.component';
+import { StartCodingComponent } from './pages/user/start-coding/start-coding.component';
+// import {ThemePalette} from '@angular/material/core';
+// import { MonacoEditorModule } from 'ngx-monaco-editor';
+// import { AceEditorModule } from 'ngx-ace-editor-wrapper';
 
 
 @NgModule({
@@ -74,7 +77,8 @@ import {MonacoEditorModule} from 'ngx-monaco-editor';
     InstructionsComponent,
     StartComponent,
     ViewAttemptsComponent,
-
+    AddCodingQuestionComponent,
+    StartCodingComponent,
   ],
   imports: [
     BrowserModule,
@@ -96,14 +100,16 @@ import {MonacoEditorModule} from 'ngx-monaco-editor';
     MatRadioModule,
     MatProgressSpinnerModule,
     NgxUiLoaderModule,
-    MonacoEditorModule.forRoot(),
+    // ThemePalette,
+    // AceEditorModule,
+    // MonacoEditorModule,
     NgxUiLoaderHttpModule.forRoot({
       showForeground:true,
     }),
-    MonacoEditorModule.forRoot()
+    
+    
   ],
-  providers: [authInterceptorProviders],
-  bootstrap: [AppComponent],
-  
+  providers: [authInterceptorProviders,StartComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

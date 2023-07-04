@@ -35,6 +35,10 @@ export class QuizService {
     return this._http.get('http://localhost:8080/quiz/active')
   }
 
+  public getActiveResultQuizzes(){
+    return this._http.get('http://localhost:8080/quiz/activeresult')
+  }
+
   public getActiveQuizzesOfCategory(cid:any){
     return this._http.get('http://localhost:8080/quiz/category/active/'+cid);
   }

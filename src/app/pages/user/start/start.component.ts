@@ -1,6 +1,7 @@
 import { LocationStrategy } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ThemePalette } from '@angular/material/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { LoginService } from 'src/app/services/login.service';
@@ -26,6 +27,10 @@ export class StartComponent implements OnInit{
   attempted=0;
   isSubmit=false;
   timer:any;
+  showResult:any;
+  isCoding=false;
+
+  color: ThemePalette = 'warn';
 
   resultData={
    
@@ -36,6 +41,19 @@ export class StartComponent implements OnInit{
     user:{id:''},
     qAttempt:0,
   };
+
+  // quizData={
+  //   title:'',
+  //   description:'',
+  //   maxMarks:'',
+  //   numberOfQuestions:'',
+  //   active:true,
+  //   showResult:true,
+  //   category:{
+  //     cid:'',
+  //   }
+  // };
+
   
 
   constructor(
@@ -58,12 +76,21 @@ export class StartComponent implements OnInit{
   this._quiz.getQuiz(this.qid).subscribe((data:any)=>{
     this.resultData.quiz.quid=data.quid;
   });
+
+  this._quiz.getQuiz(this.qid).subscribe((data:any)=>{
+    this.showResult = Boolean(data.showResult);
+    // console.log(this.showResult);
+  });
+
+
   
+
 
   }
   loadQuestions() {
     this._question.getQuestionOfQuizForTest(this.qid).subscribe((data:any)=>{
     this.questions=data;
+    console.log(data);
     this.timer=this.questions.length*1*60;
     // this.questions.forEach((q:any)=>{
     //   q['givenAnswer']="";
@@ -146,6 +173,44 @@ export class StartComponent implements OnInit{
       });
      
       this.isSubmit=true;
+    },(error)=>{
+      console.log(error);
+    });
+   
+  }
+
+
+  evalOnlyQuiz() {
+    console.log(this.questions);
+    this._question.evalQuiz(this.questions).subscribe((data:any)=>{
+      
+      this.marksGot=parseFloat(Number(data.marksGot).toFixed(2));
+      this.correctAnswers=data.correctAnswers;
+      this.attempted=data.attempted;
+      
+
+     
+      // this._login.getCurrentUser().subscribe((data:any)=>{
+      //   this.resultData.user=data;
+      // });
+      //this.resultData.quiz=this.qid;
+
+
+
+      this.resultData.attempted=data.attempted;
+     this.resultData.correctAnswers=data.correctAnswers;
+      this.resultData.marksGot=data.marksGot;
+
+      
+        
+        this.resultData.qAttempt++;
+  
+      console.log(this.resultData);
+      console.log("Component "+JSON.stringify(this.resultData));
+      this._login.addResult(this.resultData).subscribe((data:any)=>{
+        
+      });
+
     },(error)=>{
       console.log(error);
     });
