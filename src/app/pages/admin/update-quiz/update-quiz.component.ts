@@ -37,17 +37,35 @@ export class UpdateQuizComponent implements OnInit{
       console.log(this.categories);
     },(error)=>{
       console.log(error);
-      Swal.fire('Error','Error loading data from server','error');
+      Swal.fire({
+        icon:'error',
+        title:'Error loading data',
+        confirmButtonText:'OK',
+        confirmButtonColor:'#3085d6',
+        showCancelButton:false
+      });
     });
 
   }
   public updateData(){
     this._quiz.updateQuiz(this.quiz).subscribe((data)=>{
-      Swal.fire('Success','Updated quiz succesfuly','success').then((e)=>{
+      Swal.fire({
+        icon:'success',
+        title:'Successfully updated the quiz',
+        confirmButtonText:'OK',
+        confirmButtonColor:'#3085d6',
+        showCancelButton:false
+      }).then((e)=>{
         this._router.navigate(['/admin/quizzes']);
       });
     },(error)=>{
-      Swal.fire('Error','Error in updating data','error');
+      Swal.fire({
+        icon:'error',
+        title:'Error in updating data',
+        confirmButtonText:'OK',
+        confirmButtonColor:'#3085d6',
+        showCancelButton:false
+      });
       console.log(error);
     });
   }

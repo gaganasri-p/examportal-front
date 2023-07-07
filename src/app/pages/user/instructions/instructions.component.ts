@@ -34,6 +34,7 @@ export class InstructionsComponent implements OnInit{
       title:'Do you want to start the quiz now?',
       showCancelButton:true,
       confirmButtonText:'Start',
+      confirmButtonColor:'#3085d6',
       denyButtonText:'No',
       icon:'question'
     }).then((result)=>{

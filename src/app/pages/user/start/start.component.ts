@@ -10,6 +10,8 @@ import { QuizService } from 'src/app/services/quiz.service';
 import { StartService } from 'src/app/services/start.service';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
+import { browserRefresh } from 'src/app/app.component'
+
 
 @Component({
   selector: 'app-start',
@@ -29,6 +31,9 @@ export class StartComponent implements OnInit{
   timer:any;
   showResult:any;
   isCoding=false;
+
+
+  browserRefresh:any;
 
   color: ThemePalette = 'warn';
 
@@ -82,7 +87,13 @@ export class StartComponent implements OnInit{
     // console.log(this.showResult);
   });
 
-
+  this.browserRefresh = browserRefresh;
+    //console.log('refreshed?:', browserRefresh);
+    // alert('you cheater, stop refreshing')
+    if(browserRefresh){
+      this.refreshButton();
+    }
+  
   
 
 
@@ -98,7 +109,13 @@ export class StartComponent implements OnInit{
     this.startTimer();
     },(error)=>{
       console.log(error);
-      Swal.fire('Error','Error loading questions','error');
+      Swal.fire({
+        icon:'error',
+        title:'Error in loading data',
+        confirmButtonText:'OK',
+        confirmButtonColor:'#3085d6',
+        showCancelButton:false
+      });
     });
   }
   preventBackButton(){
@@ -113,6 +130,7 @@ export class StartComponent implements OnInit{
       title:'Are you sure you want to submit the quiz?',
       showCancelButton:true,
       confirmButtonText:'Submit',
+      confirmButtonColor:'#3085d6',
       denyButtonText:'No',
       icon:'question'
     }).then((e)=>{
@@ -141,6 +159,26 @@ export class StartComponent implements OnInit{
     let ss=this.timer-mm*60;
     return hh+" hr: "+mm+" min: "+ss+" sec";
   }
+
+
+  refreshButton(){
+        Swal.fire({
+          title:'You lost all your data',
+          showCancelButton:false,
+          confirmButtonText:'OK',
+          confirmButtonColor:'#3085d6',
+          denyButtonText:'No',
+          icon:'info'
+        }).then((e)=>{
+          if(e.isConfirmed){
+            this.evalQuiz();
+          }
+    //       console.log("Correct "+this.correctAnswers);
+    //       console.log("Marks "+this.marksGot);
+        });
+      }
+    
+
   evalQuiz() {
     console.log(this.questions);
     this._question.evalQuiz(this.questions).subscribe((data:any)=>{

@@ -8,6 +8,7 @@ import { QuizService } from 'src/app/services/quiz.service';
 import { StartService } from 'src/app/services/start.service';
 import Swal from 'sweetalert2';
 import { StartComponent } from '../start/start.component';
+import { browserRefresh } from 'src/app/app.component'
 
 @Component({
   selector: 'app-start-coding',
@@ -51,7 +52,7 @@ export class StartCodingComponent implements OnInit {
   //     cid:'',
   //   }
   // };
-
+  browserRefresh:any;
   
 
   constructor(
@@ -83,6 +84,13 @@ export class StartCodingComponent implements OnInit {
   });
 
 
+  this.browserRefresh = browserRefresh;
+    //console.log('refreshed?:', browserRefresh);
+    // alert('you cheater, stop refreshing')
+    if(browserRefresh){
+      this.refreshButton();
+    }
+
   }
 
 
@@ -98,7 +106,13 @@ export class StartCodingComponent implements OnInit {
     this.startTimer();
     },(error)=>{
       console.log(error);
-      Swal.fire('Error','Error loading questions','error');
+      Swal.fire({
+        icon:'error',
+        title:'Error in loading data',
+        confirmButtonText:'OK',
+        confirmButtonColor:'#3085d6',
+        showCancelButton:false
+      });
     });
   }
   preventBackButton(){
@@ -113,6 +127,7 @@ export class StartCodingComponent implements OnInit {
       title:'Are you sure you want to submit the quiz?',
       showCancelButton:true,
       confirmButtonText:'Submit',
+      confirmButtonColor:'#3085d6',
       denyButtonText:'No',
       icon:'question'
     }).then((e)=>{
@@ -141,6 +156,26 @@ export class StartCodingComponent implements OnInit {
     let ss=this.timer-mm*60;
     return hh+" hr: "+mm+" min: "+ss+" sec";
   }
+
+
+  refreshButton(){
+        Swal.fire({
+          title:'You lost all your data',
+          showCancelButton:false,
+          confirmButtonText:'OK',
+    confirmButtonColor:'#3085d6',
+          denyButtonText:'No',
+          icon:'info'
+        }).then((e)=>{
+          if(e.isConfirmed){
+            this.evalQuiz();
+          }
+    //       console.log("Correct "+this.correctAnswers);
+    //       console.log("Marks "+this.marksGot);
+        });
+      }
+
+
   evalQuiz() {
     console.log(this.questions);
     this._question.evalQuiz(this.questions).subscribe((data:any)=>{

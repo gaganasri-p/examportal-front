@@ -57,14 +57,15 @@ export class LoadQuizComponent implements OnInit{
     Swal.fire({
       title: "Please enter the code to start",
       text: "Type the code shared by your instructor:",
-      input:'text'
+      input:'text',
+      confirmButtonColor:'#3085d6',
           
   }).then((result) => {
       if (result.value==qid) {
           this._router.navigate(['/user-dashboard/instructions/'+qid]);
       }
       else if(result.value!=qid){
-        this._snack.open("Code entered is incorrect",'OK');
+        this._snack.open("Code entered is incorrect",'',{duration:3000});
       }
       
   });
@@ -96,6 +97,7 @@ export class LoadQuizComponent implements OnInit{
         Swal.fire({
           title:'You cannot attempt quiz more than once',
           confirmButtonText:'OK',
+          confirmButtonColor:'#3085d6',
           icon:'info'
         });
       }

@@ -28,24 +28,43 @@ export class ViewCategoriesComponent implements OnInit{
    },
    (error)=>{
     console.log(error);
-    Swal.fire('Error','Error loading the data','error');
+    Swal.fire({
+      icon:'error',
+      title:'Error loading the data',
+      confirmButtonText:'OK',
+      confirmButtonColor:'#3085d6',
+      showCancelButton:false
+    });
    });
   }
 
   deleteCategory(cid:any){
     Swal.fire({
-      icon:'info',
+      icon:'question',
       title:'Are you sure you want to delete the category?',
       confirmButtonText:'Delete',
+      confirmButtonColor:'#3085d6',
       showCancelButton:true,
     }).then((result)=>{
       if(result.isConfirmed){
         this._category.deleteCategory(cid).subscribe((data)=>{
           this.categories=this.categories.filter((category)=>category['cid']!=cid);
-          Swal.fire('Success','Category deleted successfuly','success');
+          Swal.fire({
+            icon:'success',
+            title:'Successfully deleted the category',
+            confirmButtonText:'OK',
+            confirmButtonColor:'#3085d6',
+            showCancelButton:false
+          });
         },(error)=>{
           console.log(error);
-          Swal.fire('Error','Error in deleting category','error');
+          Swal.fire({
+            icon:'error',
+            title:'Error in deleting category',
+            confirmButtonText:'OK',
+            confirmButtonColor:'#3085d6',
+            showCancelButton:false
+          });
         });
       }
     });

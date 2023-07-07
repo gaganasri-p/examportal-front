@@ -55,11 +55,23 @@ export class UpdateQuestionComponent implements OnInit{
 
   public updateQuestionData(){
     this._question.updateQuestion(this.question).subscribe((data)=>{
-      Swal.fire('Success','Updated quiz succesfuly','success').then((e)=>{
+      Swal.fire({
+        icon:'success',
+        title:'Successfully updated the question',
+        confirmButtonText:'OK',
+        confirmButtonColor:'#3085d6',
+        showCancelButton:false
+      }).then((e)=>{
         this._router.navigate([`/admin/view-questions/${this.qId}/${this.qTitle}`]);
       });
     },(error)=>{
-      Swal.fire('Error','Error in updating data','error');
+      Swal.fire({
+        icon:'error',
+        title:'Error in updating data',
+        confirmButtonText:'OK',
+        confirmButtonColor:'#3085d6',
+        showCancelButton:false
+      });
       console.log(error);
     });
   }

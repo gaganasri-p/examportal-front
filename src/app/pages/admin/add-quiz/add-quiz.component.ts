@@ -40,19 +40,31 @@ export class AddQuizComponent implements OnInit{
       console.log(this.categories);
     },(error)=>{
       console.log(error);
-      Swal.fire('Error','Error loading data from server','error');
+      Swal.fire({
+        icon:'error',
+        title:'Error in laoding data',
+        confirmButtonText:'OK',
+        confirmButtonColor:'#3085d6',
+        showCancelButton:false
+      });
     });
   }
 
 addQuiz(){
   console.log(this.quizData);
   if(this.quizData.title.trim()=='' || this.quizData.title==null){
-    this._snack.open('Title required','OK');
+    this._snack.open('Title required','',{duration:3000});
     return;
   }
 
   this._quiz.addQuiz(this.quizData).subscribe((data)=>{
-    Swal.fire('Success','Quiz successfuly added','success').then((e)=>{
+    Swal.fire({
+      icon:'success',
+      title:'Successfully added the quiz',
+      confirmButtonText:'OK',
+      confirmButtonColor:'#3085d6',
+      showCancelButton:false
+    }).then((e)=>{
       this._router.navigate(['/admin/quizzes']);
     });
     this.quizData={
@@ -67,7 +79,13 @@ addQuiz(){
       }
     };
   },(error)=>{
-    Swal.fire('Error','Error while adding quiz','error');
+    Swal.fire({
+      icon:'error',
+      title:'Error in adding quiz',
+      confirmButtonText:'OK',
+      confirmButtonColor:'#3085d6',
+      showCancelButton:false
+    });
     console.log(error);
   });
 }

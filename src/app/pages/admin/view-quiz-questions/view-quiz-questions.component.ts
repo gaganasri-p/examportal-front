@@ -36,14 +36,27 @@ export class ViewQuizQuestionsComponent implements OnInit {
       icon:'info',
       showCancelButton:true,
       confirmButtonText:'Delete',
+      confirmButtonColor:'#3085d6',
       title:'Are you sure you want to delete this question?'
     }).then((result)=>{
       if(result.isConfirmed){
         this._question.deleteQuestion(qid).subscribe((data:any)=>{
           this.questions=this.questions.filter((q)=>q.quesId!=qid);
-          Swal.fire('Success','Question deleted successfuly','success');
+          Swal.fire({
+            icon:'success',
+            title:'Successfully deleted the question',
+            confirmButtonText:'OK',
+            confirmButtonColor:'#3085d6',
+            showCancelButton:false
+          });
         },(error)=>{
-          Swal.fire('Error','Error in deleting questions','error');
+          Swal.fire({
+            icon:'error',
+            title:'Error in deleting question',
+            confirmButtonText:'OK',
+            confirmButtonColor:'#3085d6',
+            showCancelButton:false
+          });
           console.log(error);
         });
       }

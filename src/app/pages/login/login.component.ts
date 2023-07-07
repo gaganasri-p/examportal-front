@@ -19,12 +19,12 @@ export class LoginComponent implements OnInit{
 
   formSubmit(){
     if(this.loginData.username.trim()==''|| this.loginData.username.trim()==null){
-      this.snack.open("Username is required",'OK');
+      this.snack.open("Username is required",'',{duration:3000});
       return;
     }
 
     if(this.loginData.password.trim()==''|| this.loginData.password.trim()==null){
-      this.snack.open("Password is required",'OK');
+      this.snack.open("Password is required",'',{duration:3000});
          return;
      }
 
@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit{
       (error)=>{
         console.log("Error");
         console.log(error);
-        this.snack.open("Invalid Credentials",'OK');
+        this.snack.open("Invalid Credentials",'',{duration:3000});
       }
      );
   }

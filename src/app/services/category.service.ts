@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import baseUrl from './helper';
 
 @Injectable({
   providedIn: 'root'
@@ -8,14 +9,14 @@ export class CategoryService {
 
   constructor(private _http:HttpClient) { }
   public categories(){
-    return this._http.get('http://16.170.55.198:8080/category/');
+    return this._http.get(baseUrl+'/category/');
   }
 
   public addCategory(category:any){
-    return this._http.post('http://16.170.55.198:8080/category/',category);
+    return this._http.post(baseUrl+'/category/',category);
   }
 
   public deleteCategory(cid:any){
-    return this._http.delete('http://16.170.55.198:8080/category/'+cid);
+    return this._http.delete(baseUrl+'/category/'+cid);
   }
 }

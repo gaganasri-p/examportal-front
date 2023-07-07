@@ -57,7 +57,13 @@ export class AddQuestionComponent implements OnInit{
     }  
   
     this._question.addQuestion(this.questionData).subscribe((data: any)=>{
-      Swal.fire('Success','Question added succesfuly','success').then((e)=>{
+      Swal.fire({
+        icon:'success',
+        title:'Successfully added the question',
+        confirmButtonText:'OK',
+        confirmButtonColor:'#3085d6',
+        showCancelButton:false
+      }).then((e)=>{
         this._router.navigate([`/admin/view-questions/${this.qId}/${this.qTitle}`]);
       });
       this.questionData.content='';
@@ -69,7 +75,13 @@ export class AddQuestionComponent implements OnInit{
       this.questionData.code=false;
       console.log(this.questionData);
     },(error: any)=>{
-      Swal.fire("Error",'Error in adding question','error');
+      Swal.fire({
+        icon:'error',
+        title:'Errorin adding question',
+        confirmButtonText:'OK',
+        confirmButtonColor:'#3085d6',
+        showCancelButton:false
+      });
       console.log(error);
     });
   }

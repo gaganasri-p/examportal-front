@@ -23,19 +23,19 @@ export class SignupComponent implements OnInit{
     console.log(this.user);
     if(this.user.username=='' || this.user.username==null)
     {
-      this.snack.open('Username is required','OK');
+      this.snack.open('Username is required','',{duration:3000});
       return;
     }
 
     if(this.user.password=='' || this.user.password==null)
     {
-      this.snack.open('Password is required','OK');
+      this.snack.open('Password is required','',{duration:3000});
       return;
     }
 
     if(this.user.firstName=='' || this.user.firstName==null)
     {
-      this.snack.open('Firstname is required','OK');
+      this.snack.open('Firstname is required','',{duration:3000});
       return;
     }
 
@@ -47,14 +47,21 @@ export class SignupComponent implements OnInit{
 
     if(this.user.email=='' || this.user.email==null)
     {
-      this.snack.open('E-mail is required','OK');
+      this.snack.open('E-mail is required','',{duration:3000});
       return;
     }
 
     this.userService.addUser(this.user).subscribe(
       (data:any)=>{
         console.log(data);
-        Swal.fire('Success','User is registered with ID '+data.id,'success');
+        //Swal.fire('Success','User is registered with ID '+data.id,'success');
+        Swal.fire({
+          icon:'success',
+          title:'User is registered with ID '+data.id,
+          confirmButtonText:'OK',
+          confirmButtonColor:'#3085d6',
+          showCancelButton:false
+        });
       },
       (error)=>{
         console.log(error);

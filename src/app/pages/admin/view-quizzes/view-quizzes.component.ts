@@ -44,7 +44,13 @@ export class ViewQuizzesComponent implements OnInit{
       console.log(this.random_number);
     },(error)=>{
       console.log(error);
-      Swal.fire('Error','Error loading data','error');
+      Swal.fire({
+        icon:'error',
+        title:'Error in loading data',
+        confirmButtonText:'OK',
+        confirmButtonColor:'#3085d6',
+        showCancelButton:false
+      });
     });
   }
 
@@ -53,15 +59,28 @@ export class ViewQuizzesComponent implements OnInit{
       icon:'info',
       title:'Are you sure you want to delete the quiz?',
       confirmButtonText:'Delete',
+      confirmButtonColor:'#3085d6',
       showCancelButton:true,
     }).then((result)=>{
       if(result.isConfirmed){
         this._quiz.deleteQuiz(quid).subscribe((data)=>{
           this.quizzes=this.quizzes.filter((quiz)=>quiz['quid']!=quid);
-          Swal.fire('Success','Quiz deleted successfuly','success');
+          Swal.fire({
+            icon:'success',
+            title:'Successfully deleted the quiz',
+            confirmButtonText:'OK',
+            confirmButtonColor:'#3085d6',
+            showCancelButton:false
+          });
         },(error)=>{
           console.log(error);
-          Swal.fire('Error','Error in deleting quiz','error');
+          Swal.fire({
+            icon:'error',
+            title:'Error in deleting quiz',
+            confirmButtonText:'OK',
+            confirmButtonColor:'#3085d6',
+            showCancelButton:false
+          });
         });
       }
     });

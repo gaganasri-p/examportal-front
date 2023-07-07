@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/internal/Subject';
+import baseUrl from './helper';
 
 @Injectable({
   providedIn: 'root'
@@ -12,20 +13,20 @@ export class LoginService {
   constructor(private http:HttpClient) { }
 
   public getCurrentUser(){
-    return this.http.get('http://16.170.55.198:8080/current-user')
+    return this.http.get(baseUrl+'/current-user')
   }
 
   public getCurrentUserId(){
-    return this.http.get('http://16.170.55.198:8080/current-userid')
+    return this.http.get(baseUrl+'/current-userid')
   }
 
   public generateToken(loginData:any){
-    return this.http.post('http://16.170.55.198:8080/generate-token',loginData);
+    return this.http.post(baseUrl+'/generate-token',loginData);
   }
 
   public addResult(resultData:any){
     console.log("Service: "+JSON.stringify(resultData));
-    return this.http.post('http://16.170.55.198:8080/result/exam',resultData);
+    return this.http.post(baseUrl+'/result/exam',resultData);
   }
 
 

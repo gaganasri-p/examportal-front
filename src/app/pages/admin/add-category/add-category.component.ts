@@ -18,19 +18,31 @@ export class AddCategoryComponent implements OnInit{
   ngOnInit(): void { }
   formSubmit(){
     if(this.category.title.trim()=='' || this.category.title==null){
-      this._snack.open('Title required','OK');
+      this._snack.open('Title required','',{duration:3000});
       return;
     }
 
     this._category.addCategory(this.category).subscribe((data:any)=>{
       this.category.title='';
       this.category.description='';
-      Swal.fire('Done','Successfully added the category','success').then((e)=>{
+      Swal.fire({
+        icon:'success',
+        title:'Successfully added the category',
+        confirmButtonText:'OK',
+        confirmButtonColor:'#3085d6',
+        showCancelButton:false
+      }).then((e)=>{
         this._router.navigate(['/admin/categories']);
       });
     },(error)=>{
       console.log(error);
-      Swal.fire('Error','Server error','error');
+      Swal.fire({
+        icon:'error',
+        title:'Server Error',
+        confirmButtonText:'OK',
+        confirmButtonColor:'#3085d6',
+        showCancelButton:false
+      });
     });
   }
 
