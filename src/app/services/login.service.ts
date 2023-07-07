@@ -12,20 +12,20 @@ export class LoginService {
   constructor(private http:HttpClient) { }
 
   public getCurrentUser(){
-    return this.http.get('http://localhost:8080/current-user')
+    return this.http.get('http://16.170.55.198:8080/current-user')
   }
 
   public getCurrentUserId(){
-    return this.http.get('http://localhost:8080/current-userid')
+    return this.http.get('http://16.170.55.198:8080/current-userid')
   }
 
   public generateToken(loginData:any){
-    return this.http.post('http://localhost:8080/generate-token',loginData);
+    return this.http.post('http://16.170.55.198:8080/generate-token',loginData);
   }
 
   public addResult(resultData:any){
     console.log("Service: "+JSON.stringify(resultData));
-    return this.http.post('http://localhost:8080/result/exam',resultData);
+    return this.http.post('http://16.170.55.198:8080/result/exam',resultData);
   }
 
 
